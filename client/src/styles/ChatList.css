@@ -1,0 +1,145 @@
+/* client/src/components/ChatList.css */
+.chat-list-container {
+  width: 350px;
+  height: 100vh;
+  border-right: 1px solid #e9edef;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f2f5;
+}
+
+.chat-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #e9edef;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+.action-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.icon {
+  font-size: 20px;
+  color: #54656f;
+  cursor: pointer;
+}
+
+.search-bar {
+  padding: 8px 12px;
+  background-color: #f0f2f5;
+}
+
+.search-input {
+  background-color: white;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 12px;
+}
+
+.chat-categories {
+  display: flex;
+  padding: 0 12px;
+  border-bottom: 1px solid #e9edef;
+  background-color: white;
+}
+
+.chat-categories span {
+  padding: 12px 16px;
+  color: #667781;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chat-categories span.active {
+  color: #00a884;
+  border-bottom: 2px solid #00a884;
+}
+
+.conversations {
+  flex: 1;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.conversation-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #e9edef;
+}
+
+.conversation-item:hover {
+  background-color: #f5f6f6;
+}
+
+.conversation-item.active {
+  background-color: #f0f2f5;
+}
+
+.conversation-title {
+  font-size: 16px;
+  color: #111b21;
+}
+
+.conversation-preview {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.message-preview {
+  color: #667781;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.message-time {
+  color: #667781;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.download-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: #f0f2f5;
+  border-top: 1px solid #e9edef;
+}
+
+.download-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.download-text h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #111b21;
+}
+
+.download-text p {
+  margin: 0;
+  font-size: 12px;
+  color: #667781;
+}
+
+.download-button {
+  color: #00a884;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}

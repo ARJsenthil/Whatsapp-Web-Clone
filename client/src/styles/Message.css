@@ -1,0 +1,49 @@
+
+/* client/src/components/Message.css */
+.message {
+  display: flex;
+  margin-bottom: 10px;
+  max-width: 65%;
+}
+.message.incoming {
+  align-self: flex-start;
+}
+.message.outgoing {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.message-content {
+  margin: 0 8px;
+}
+.message-bubble {
+  padding: 8px 12px;
+  border-radius: 7.5px;
+  position: relative;
+  word-wrap: break-word;
+}
+.message.incoming .message-bubble {
+  background-color: white;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.1);
+}
+.message.outgoing .message-bubble {
+  background-color: #dcf8c6;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.1);
+}
+.message-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 4px;
+}
+.time {
+  font-size: 11px;
+  color: #667781;
+  margin-right: 4px;
+}
+.status-icon {
+  font-size: 16px;
+  color: #667781;
+}
+.status-icon.read {
+  color: #53bdeb;
+}
