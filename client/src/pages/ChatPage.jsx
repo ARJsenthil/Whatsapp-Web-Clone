@@ -22,7 +22,7 @@ const ChatPage = () => {
   const fetchConversations = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/conversations');
+      const response = await axios.get(API+'/api/conversations');
       setConversations(response.data);
     } catch (error) {
       console.error('Failed to load conversations:', error);
@@ -30,10 +30,11 @@ const ChatPage = () => {
       setLoading(false);
     }
   };
+  const API = 'https://whatsapp-web-clone-zbqt.onrender.com';
   const fetchMessages = async (wa_id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/conversations/${wa_id}/messages`, {
+      const response = await axios.get(API+`/api/conversations/${wa_id}/messages`, {
         params: { currentUser }
       });
       setMessages(response.data);
@@ -47,13 +48,15 @@ const ChatPage = () => {
     if (!messageText.trim() || !selectedConversation) return;
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/conversations/${selectedConversation.wa_id}/messages`,
+        API+`/api/conversations/${selectedConversation.wa_id}/messages`,
         { text: messageText, currentUser }
       );
       
       setMessages([...messages, response.data]);
       
       // Update conversation list
+
+
       setConversations(conversations.map(conv => 
         conv.wa_id === selectedConversation.wa_id ? { 
           ...conv, 
