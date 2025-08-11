@@ -1,90 +1,129 @@
 import React, { useState, useEffect } from 'react';
-import { Layout } from 'antd';
-import Sidebar from '../components/Sidebar';
+import { Layout, Spin } from 'antd';
+import ChatList from '../components/ChatList';
 import ChatArea from '../components/ChatArea';
 import axios from 'axios';
 import '../styles/ChatPage.css';
+import { API_BASE_URL } from '../common/APi';
+
 const { Content } = Layout;
+
 const ChatPage = () => {
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentUser] = useState('918329446654'); // Business number from payload
+  const [currentUser] = useState('user123'); // This should come from auth context
+
   useEffect(() => {
+    const fetchConversations = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${API_BASE_URL}/api/conversations`);
+        setConversations(response.data);
+      } catch (error) {
+        console.error('Failed to load conversations:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchConversations();
   }, []);
+
   useEffect(() => {
-    if (selectedConversation) {
-      fetchMessages(selectedConversation.wa_id);
-    }
-  }, [selectedConversation]);
-  const fetchConversations = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(API+'/api/conversations');
-      setConversations(response.data);
-    } catch (error) {
-      console.error('Failed to load conversations:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const API = 'https://whatsapp-web-clone-zbqt.onrender.com';
-  const fetchMessages = async (wa_id) => {
-    try {
-      setLoading(true);
-      const response = await axios.get(API+`/api/conversations/${wa_id}/messages`, {
-        params: { currentUser }
-      });
-      setMessages(response.data);
-    } catch (error) {
-      console.error('Failed to load messages:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (!selectedConversation) return;
+
+    const fetchMessages = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `${API_BASE_URL}/api/conversations/${selectedConversation._id}/messages`,
+          { params: { currentUser } }
+        );
+        setMessages(response.data);
+      } catch (error) {
+        console.error('Failed to load messages:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMessages();
+  }, [selectedConversation, currentUser]);
+
   const handleSendMessage = async (messageText) => {
     if (!messageText.trim() || !selectedConversation) return;
+    const tempId = `temp-${Date.now()}`;
+
     try {
+      // Optimistic update
+      const newMessage = {
+        _id: tempId,
+        wa_id: selectedConversation._id,
+        user_name: currentUser,
+        from: currentUser,
+        timestamp: new Date().toISOString(),
+        text: messageText,
+        type: 'text',
+        status: 'sent',
+        direction: 'outbound'
+      };
+
+      setMessages(prev => [...prev, newMessage]);
+      setConversations(prev =>
+        prev.map(conv =>
+          conv._id === selectedConversation._id
+            ? {
+                ...conv,
+                last_message: messageText,
+                last_message_time: new Date().toISOString()
+              }
+            : conv
+        )
+      );
+
+      // Actual API call
       const response = await axios.post(
-        API+`/api/conversations/${selectedConversation.wa_id}/messages`,
+        `${API_BASE_URL}/api/conversations/${selectedConversation._id}/messages`,
         { text: messageText, currentUser }
       );
-      
-      setMessages([...messages, response.data]);
-      
-      // Update conversation list
 
-
-      setConversations(conversations.map(conv => 
-        conv.wa_id === selectedConversation.wa_id ? { 
-          ...conv, 
-          last_message: messageText,
-          last_message_time: new Date().toISOString()
-        } : conv
-      ));
+      // Replace temp message with actual message from server
+      setMessages(prev =>
+        prev.map(msg => (msg._id === tempId ? response.data : msg))
+      );
     } catch (error) {
       console.error('Failed to send message:', error);
+      // Rollback optimistic update
+      setMessages(prev => prev.filter(msg => msg._id !== tempId));
     }
   };
+
   return (
     <Content className="chat-page-content">
       <div className="whatsapp-container">
-        <Sidebar 
-          conversations={conversations} 
-          onSelectConversation={setSelectedConversation}
-          selectedConversation={selectedConversation}
+        <ChatList
+          conversations={conversations}
+          onSelectChat={setSelectedConversation}
+          selectedChat={selectedConversation}
           loading={loading}
         />
-        <ChatArea 
-          selectedConversation={selectedConversation}
-          messages={messages}
-          onSendMessage={handleSendMessage}
-          currentUser={currentUser}
-        />
+        {loading && !selectedConversation ? (
+          <div className="chat-area loading">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <ChatArea
+            selectedConversation={selectedConversation}
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            currentUser={currentUser}
+          />
+        )}
       </div>
     </Content>
   );
 };
+
 export default ChatPage;
