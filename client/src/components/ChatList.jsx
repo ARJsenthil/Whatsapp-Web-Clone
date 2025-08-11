@@ -78,17 +78,6 @@ const ChatList = ({ conversations, onSelectChat, selectedChat, loading }) => {
         />
       </div>
 
-      {/* Download Banner */}
-      <div className="download-banner">
-        <div className="download-content">
-          <Avatar size={40} src="/whatsapp-logo.png" />
-          <div className="download-text">
-            <h4>Download WhatsApp for Windows</h4>
-            <p>Make calls, share your screen and get a faster experience</p>
-          </div>
-        </div>
-        <div className="download-button">Download</div>
-      </div>
     </div>
   );
 };

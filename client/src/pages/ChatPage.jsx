@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Spin } from 'antd';
+import { Button, Drawer, Layout, Spin } from 'antd';
 import ChatList from '../components/ChatList';
 import ChatArea from '../components/ChatArea';
 import axios from 'axios';
 import '../styles/ChatPage.css';
 import { API_BASE_URL } from '../common/APi';
+import { MenuOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
 
 const ChatPage = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showChatList, setShowChatList] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentUser] = useState('user123'); // This should come from auth context
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setShowChatList(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -99,27 +114,74 @@ const ChatPage = () => {
       setMessages(prev => prev.filter(msg => msg._id !== tempId));
     }
   };
+  const toggleChatList = () => {
+    setShowChatList(!showChatList);
+  };
 
   return (
     <Content className="chat-page-content">
       <div className="whatsapp-container">
-        <ChatList
-          conversations={conversations}
-          onSelectChat={setSelectedConversation}
-          selectedChat={selectedConversation}
-          loading={loading}
-        />
-        {loading && !selectedConversation ? (
-          <div className="chat-area loading">
-            <Spin size="large" />
+        {/* Mobile Header */}
+        {isMobile && selectedConversation && (
+          <div className="mobile-header">
+            <Button
+              type="text" 
+              icon={<MenuOutlined />} 
+              onClick={toggleChatList}
+            />
+            <span>{selectedConversation.user_name}</span>
           </div>
-        ) : (
+        )}
+
+        {/* Desktop Chat List */}
+        {!isMobile && (
+          <ChatList
+            conversations={conversations}
+            onSelectChat={setSelectedConversation}
+            selectedChat={selectedConversation}
+            loading={loading}
+          />
+        )}
+
+        {/* Mobile Chat List Drawer */}
+        {isMobile && (
+          <Drawer
+            placement="left"
+            visible={showChatList}
+            onClose={toggleChatList}
+            width="85%"
+            bodyStyle={{ padding: 0 }}
+            headerStyle={{ display: 'none' }}
+          >
+            <ChatList
+              conversations={conversations}
+              onSelectChat={(chat) => {
+                setSelectedConversation(chat);
+                setShowChatList(false);
+              }}
+              selectedChat={selectedConversation}
+              loading={loading}
+            />
+          </Drawer>
+        )}
+
+        {/* Chat Area */}
+        {(!isMobile || selectedConversation) && (
           <ChatArea
             selectedConversation={selectedConversation}
             messages={messages}
             onSendMessage={handleSendMessage}
             currentUser={currentUser}
+            isMobile={isMobile}
+            onBackToChatList={toggleChatList}
           />
+        )}
+
+        {/* Empty State for Mobile */}
+        {isMobile && !selectedConversation && (
+          <div className="mobile-empty-state">
+            <p>Select a chat to start messaging</p>
+          </div>
         )}
       </div>
     </Content>

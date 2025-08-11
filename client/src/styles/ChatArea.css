@@ -78,3 +78,22 @@
   border-radius: 20px;
   padding: 9px 12px;
 }
+/* Mobile specific styles */
+@media (max-width: 767px) {
+  .chat-area {
+    width: 100%;
+    border-right: none;
+  }
+
+  .message {
+    max-width: 80%;
+  }
+
+  .input-area {
+    padding: 8px 12px;
+  }
+
+  .message-input {
+    padding: 8px 10px;
+  }
+}

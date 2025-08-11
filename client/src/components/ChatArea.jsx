@@ -1,10 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Avatar, Input, Button, message as antMessage } from 'antd';
-import { SearchOutlined, PaperClipOutlined, SmileOutlined, SendOutlined } from '@ant-design/icons';
+import { SearchOutlined, PaperClipOutlined, SmileOutlined, SendOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import Message from './Message';
 import '../styles/ChatArea.css';
 
-const ChatArea = ({ selectedConversation, messages, onSendMessage, currentUser }) => {
+const ChatArea = ({ 
+  selectedConversation, 
+  messages, 
+  onSendMessage, 
+  currentUser,
+  isMobile,
+  onBackToChatList 
+}) => {
+
   const [messageInput, setMessageInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
@@ -49,9 +57,17 @@ const ChatArea = ({ selectedConversation, messages, onSendMessage, currentUser }
   }
 
   return (
-    <div className="chat-area">
+    <div className={`chat-area ${isMobile ? 'mobile' : ''}`}>
       {/* Header */}
       <div className="chat-header">
+        {isMobile && (
+          <Button 
+            type="text" 
+            icon={<ArrowLeftOutlined />} 
+            onClick={onBackToChatList}
+            className="back-button"
+          />
+        )}
         <div className="chat-info">
           <Avatar size={40} src={selectedConversation.avatar || '/default-avatar.png'} />
           <div className="chat-details">
