@@ -34,6 +34,6 @@ const messageSchema = new mongoose.Schema({
 messageSchema.index({ wa_id: 1, timestamp: -1 });
 messageSchema.index({ from: 1, timestamp: -1 });
 
-const Message = mongoose.model('Message', messageSchema);
+const Message = mongoose.model('processed_messages', messageSchema);
 
 module.exports = Message;
