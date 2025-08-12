@@ -202,7 +202,7 @@ const [progress, setProgress] = useState(0);
         {/* Empty State for Mobile */}
         {isMobile && !selectedConversation && (
           <div className="mobile-empty-state">
-            <p>Select a chat to start messaging</p>
+            {/* <p>Select a chat to start messaging</p> */}
           </div>
         )}
       </div>
