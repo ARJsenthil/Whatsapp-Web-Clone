@@ -72,7 +72,7 @@ const ChatArea = ({
             />
           )}
           <div className="chat-info">
-            <Avatar size={40} src={selectedConversation.avatar || '../assets/images/default-avatar.png'} />
+            <Avatar size={40} src={selectedConversation.avatar || default_avatar} />
             <div className="chat-details">
               <h3>{selectedConversation.user_name}</h3>
               <p>{isTyping ? 'typing...' : 'Online'}</p>
@@ -96,7 +96,7 @@ const ChatArea = ({
           ))
         ) : (
           <div className="no-messages">
-            Start a new conversation with {selectedConversation.user_name}
+            {/* Start a new conversation with {selectedConversation.user_name} */}
           </div>
         )}
         <div ref={messagesEndRef} />

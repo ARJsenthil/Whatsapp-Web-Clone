@@ -91,6 +91,10 @@
   border: none !important;
   border-radius: 15px;
 }
+.conversation-item span .ant-avatar-image  {
+  width: 45px;
+  height: 45px;
+}
 .conversation-item .ant-list-item-meta {
   align-items: center !important;
 }
