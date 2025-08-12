@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Tooltip } from 'antd';
 import { CheckOutlined, DoubleRightOutlined } from '@ant-design/icons';
-import '../styles/Message.css';
+import '../assets/styles/Message.css';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 

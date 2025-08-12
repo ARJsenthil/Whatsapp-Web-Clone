@@ -2,7 +2,7 @@
 import React from 'react';
 import { Avatar, Input, List, Badge } from 'antd';
 import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
-import '../styles/Sidebar.css';
+import '../assets/styles/Sidebar.css';
 const Sidebar = ({ conversations, onSelectConversation, selectedConversation, loading }) => {
   return (
     <div className="sidebar">

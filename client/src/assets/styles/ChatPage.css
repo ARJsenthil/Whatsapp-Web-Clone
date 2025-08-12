@@ -49,11 +49,6 @@
   }
 
   .chat-area.mobile{
-    position: fixed;
-    /* top: 60px;  */
-    left: 0;
-    right: 0;
-    bottom: 0;
     height: calc(100vh);
   }
 

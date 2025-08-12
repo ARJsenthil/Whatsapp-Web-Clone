@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100%;
   background-color: #eae6df;
-  background-image: url('whatsapp-bg.png');
+  background-image: url('../images/whatsapp-bg.png');
   background-repeat: repeat;
 }
 .chat-area.empty {

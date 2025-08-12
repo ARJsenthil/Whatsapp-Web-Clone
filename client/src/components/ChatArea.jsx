@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Avatar, Input, Button, message as antMessage } from 'antd';
 import { SearchOutlined, PaperClipOutlined, SmileOutlined, SendOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import Message from './Message';
-import '../styles/ChatArea.css';
+import '../assets/styles/ChatArea.css';
+import default_avatar from '../assets/images/default-avatar.png';
+import whatsapp_logo from '../assets/images/whatsapp-logo.png';
 
 const ChatArea = ({
   selectedConversation,
@@ -47,7 +49,7 @@ const ChatArea = ({
     return (
       <div className="chat-area empty">
         <div className="empty-state">
-          <Avatar size={200} src="/whatsapp-logo.png" />
+          <Avatar size={200} src={whatsapp_logo} />
           <h1>WhatsApp Web</h1>
           <p>Send and receive messages without keeping your phone online.</p>
           <p>Use WhatsApp on up to 4 linked devices and 1 phone at the same time.</p>
@@ -70,7 +72,7 @@ const ChatArea = ({
             />
           )}
           <div className="chat-info">
-            <Avatar size={40} src={selectedConversation.avatar || '/default-avatar.png'} />
+            <Avatar size={40} src={selectedConversation.avatar || '../assets/images/default-avatar.png'} />
             <div className="chat-details">
               <h3>{selectedConversation.user_name}</h3>
               <p>{isTyping ? 'typing...' : 'Online'}</p>

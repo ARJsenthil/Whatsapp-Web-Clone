@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Input, List, Avatar, Badge } from 'antd';
 import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
-import '../styles/ChatList.css';
-
+import '../assets/styles/ChatList.css';
+import default_avatar from '../assets/images/default-avatar.png';
+import user_avatar from '../assets/images/user-avatar.png';
 const ChatList = ({ conversations, onSelectChat, selectedChat, loading }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -16,7 +17,7 @@ const ChatList = ({ conversations, onSelectChat, selectedChat, loading }) => {
       {/* Header */}
       <div className="chat-list-header">
         <div className="profile-section">
-          <Avatar size={40} src="/user-avatar.png" />
+          <Avatar size={40} src={user_avatar} />
         </div>
         <div className="action-icons">
           <FilterOutlined className="icon" />
@@ -56,7 +57,7 @@ const ChatList = ({ conversations, onSelectChat, selectedChat, loading }) => {
               <List.Item.Meta
                 avatar={
                   <Badge count={conversation.unread_count} offset={[-10, 0]}>
-                    <Avatar src={conversation.avatar || '/default-avatar.png'} />
+                    <Avatar src={conversation.avatar || default_avatar} />
                   </Badge>
                 }
                 title={<div className="conversation-title">{conversation.user_name}</div>}

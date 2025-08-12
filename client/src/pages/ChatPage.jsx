@@ -3,7 +3,7 @@ import { Button, Drawer, Layout, Spin } from 'antd';
 import ChatList from '../components/ChatList';
 import ChatArea from '../components/ChatArea';
 import axios from 'axios';
-import '../styles/ChatPage.css';
+import '../assets/styles/ChatPage.css';
 import { API_BASE_URL } from '../common/APi';
 import { MenuOutlined } from '@ant-design/icons';
 
