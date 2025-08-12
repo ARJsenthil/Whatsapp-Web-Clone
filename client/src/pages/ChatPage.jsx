@@ -7,7 +7,7 @@ import '../assets/styles/ChatPage.css';
 import { API_BASE_URL } from '../common/APi';
 import { MenuOutlined, WhatsAppOutlined } from '@ant-design/icons';
 import whatsapp_logo_loading_conversation from '../assets/images/whatsapp-logo-loading-conversation.png';
-
+ 
 const { Content } = Layout;
 
 const ChatPage = () => {

@@ -4,6 +4,7 @@ import { CheckOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import '../assets/styles/Message.css';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import double_check_outlined from '../assets/images/double-check.png';
 
 dayjs.extend(relativeTime);
 
@@ -13,9 +14,9 @@ const MessageStatus = ({ status, timestamp }) => {
       case 'sent': 
         return <CheckOutlined className="status-icon sent" />;
       case 'delivered': 
-        return <DoubleRightOutlined className="status-icon delivered" />;
+        return <img src={double_check_outlined} className="status-icon deliverd" />;
       case 'read': 
-        return <DoubleRightOutlined className="status-icon read" />;
+        return <img src={double_check_outlined} className="status-icon read" />;
       default: 
         return <CheckOutlined className="status-icon" />;
     }
