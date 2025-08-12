@@ -20,8 +20,8 @@
   display: flex;
   align-items: center;
   color: green;
-  font: 30px bold;
-  font-family: sans-serif;
+  font: 25px bolder !important;
+  font-family: sans-serif !important;
 }
 
 .action-icons {
