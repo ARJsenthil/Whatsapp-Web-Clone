@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input, List, Avatar, Badge } from 'antd';
-import { SearchOutlined, UserAddOutlined, } from '@ant-design/icons';
+import { SearchOutlined, MoreOutlined, UserAddOutlined } from '@ant-design/icons';
 import '../assets/styles/ChatList.css';
 import default_avatar from '../assets/images/default-avatar.png';
 import user_avatar from '../assets/images/user-avatar.png';
@@ -22,6 +22,7 @@ const ChatList = ({ conversations, onSelectChat, selectedChat, loading }) => {
         </div>
         <div className="action-icons">
           <UserAddOutlined className="icon" />
+          <MoreOutlined className="icon" />
         </div>
       </div>
 

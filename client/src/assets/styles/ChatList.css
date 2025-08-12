@@ -33,6 +33,8 @@
 .action-icons .icon svg {
   /* width: 100px !important; */
   font-size: large;
+  font-weight: 100px;
+  color: #111b21;
 }
 
 .icon {
