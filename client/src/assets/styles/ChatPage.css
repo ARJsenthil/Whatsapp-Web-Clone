@@ -11,6 +11,53 @@
   background: white;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
+
+
+.whatsapp-header {
+  /* background-color: #00a884; */
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.whatsapp-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 300;
+  color: black;
+}
+
+.whatsapp-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  color: #54656f; 
+}
+
+.progress-container {
+  width: 190px;
+  margin: auto;
+  border-radius: 50px;
+  height: 4px;
+  background-color: #e9edef;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #25d366;
+  transition: width 0.03s linear;
+}
+
+.encryption-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #667781;
+}
 /* Mobile styles */
 @media (max-width: 767px) {
   .whatsapp-container {

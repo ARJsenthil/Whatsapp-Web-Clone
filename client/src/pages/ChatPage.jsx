@@ -5,7 +5,8 @@ import ChatArea from '../components/ChatArea';
 import axios from 'axios';
 import '../assets/styles/ChatPage.css';
 import { API_BASE_URL } from '../common/APi';
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, WhatsAppOutlined } from '@ant-design/icons';
+import whatsapp_logo_loading_conversation from '../assets/images/whatsapp-logo-loading-conversation.png';
 
 const { Content } = Layout;
 
@@ -16,7 +17,23 @@ const ChatPage = () => {
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingConversation, setLoadingConversation] = useState(false);
   const [currentUser] = useState('user123'); // This should come from auth context
+const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 1;
+      });
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,13 +50,13 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        setLoading(true);
+        setLoadingConversation(true);
         const response = await axios.get(`${API_BASE_URL}/api/conversations`);
         setConversations(response.data);
       } catch (error) {
         console.error('Failed to load conversations:', error);
       } finally {
-        setLoading(false);
+        setLoadingConversation(false);
       }
     };
 
@@ -119,7 +136,24 @@ const ChatPage = () => {
   };
 
   return (
-    <Content className="chat-page-content">
+    <div style={loadingConversation? {margin: 'auto'}: {}}>
+      {loadingConversation?
+      <div className="whatsapp-content">
+        <div className="whatsapp-header">
+          {/* <WhatsAppOutlined style={{fontSize: '50px'}}/> */}
+          <img width='100px' src={whatsapp_logo_loading_conversation} />
+          <h1>WhatsApp</h1>
+          <div className="progress-container">
+            <div 
+              className="progress-bar" 
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        <p className="encryption-text">End-to-end encrypted</p> 
+        </div>
+      </div>
+      :
+      <Content className="chat-page-content">
       <div className="whatsapp-container">
         {/* Desktop Chat List */}
         {!isMobile && (
@@ -173,6 +207,8 @@ const ChatPage = () => {
         )}
       </div>
     </Content>
+      }
+    </div>
   );
 };
 

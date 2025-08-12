@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import ChatPage from './pages/ChatPage';
-import './styles/App.css';
+import './assets/styles/App.css';
 import { useEffect } from 'react';
 function App() {
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input, List, Avatar, Badge } from 'antd';
-import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
+import { SearchOutlined, UserAddOutlined, } from '@ant-design/icons';
 import '../assets/styles/ChatList.css';
 import default_avatar from '../assets/images/default-avatar.png';
 import user_avatar from '../assets/images/user-avatar.png';
@@ -17,10 +17,11 @@ const ChatList = ({ conversations, onSelectChat, selectedChat, loading }) => {
       {/* Header */}
       <div className="chat-list-header">
         <div className="profile-section">
-          <Avatar size={40} src={user_avatar} />
+          {/* <Avatar size={40} src={user_avatar} /> */}
+          Whatsapp
         </div>
         <div className="action-icons">
-          <FilterOutlined className="icon" />
+          <UserAddOutlined className="icon" />
         </div>
       </div>
 

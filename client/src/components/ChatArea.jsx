@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Avatar, Input, Button, message as antMessage } from 'antd';
-import { SearchOutlined, PaperClipOutlined, SmileOutlined, SendOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { SearchOutlined, PaperClipOutlined, SmileOutlined, SendOutlined, ArrowLeftOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import Message from './Message';
 import '../assets/styles/ChatArea.css';
 import default_avatar from '../assets/images/default-avatar.png';
