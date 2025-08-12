@@ -121,18 +121,6 @@ const ChatPage = () => {
   return (
     <Content className="chat-page-content">
       <div className="whatsapp-container">
-        {/* Mobile Header */}
-        {isMobile && selectedConversation && (
-          <div className="mobile-header">
-            <Button
-              type="text" 
-              icon={<MenuOutlined />} 
-              onClick={toggleChatList}
-            />
-            <span>{selectedConversation.user_name}</span>
-          </div>
-        )}
-
         {/* Desktop Chat List */}
         {!isMobile && (
           <ChatList
@@ -149,7 +137,7 @@ const ChatPage = () => {
             placement="left"
             visible={showChatList}
             onClose={toggleChatList}
-            width="85%"
+            width="100%"
             bodyStyle={{ padding: 0 }}
             headerStyle={{ display: 'none' }}
           >

@@ -1,4 +1,3 @@
-
 /* client/src/components/ChatArea.css */
 .chat-area {
   flex: 1;
@@ -36,6 +35,15 @@
   padding: 10px 16px;
   background-color: #f0f2f5;
   border-bottom: 1px solid #e0e0e0;
+}
+.chat-header .back-btn {
+  display: flex;
+  /* gap: 2px; */
+  display: flex;
+  align-items: center;
+}
+.chat-header .back-button {
+  color: gray !important;
 }
 .chat-info {
   display: flex;

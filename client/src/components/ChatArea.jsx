@@ -4,13 +4,13 @@ import { SearchOutlined, PaperClipOutlined, SmileOutlined, SendOutlined, ArrowLe
 import Message from './Message';
 import '../styles/ChatArea.css';
 
-const ChatArea = ({ 
-  selectedConversation, 
-  messages, 
-  onSendMessage, 
+const ChatArea = ({
+  selectedConversation,
+  messages,
+  onSendMessage,
   currentUser,
   isMobile,
-  onBackToChatList 
+  onBackToChatList
 }) => {
 
   const [messageInput, setMessageInput] = useState('');
@@ -60,19 +60,21 @@ const ChatArea = ({
     <div className={`chat-area ${isMobile ? 'mobile' : ''}`}>
       {/* Header */}
       <div className="chat-header">
-        {isMobile && (
-          <Button 
-            type="text" 
-            icon={<ArrowLeftOutlined />} 
-            onClick={onBackToChatList}
-            className="back-button"
-          />
-        )}
-        <div className="chat-info">
-          <Avatar size={40} src={selectedConversation.avatar || '/default-avatar.png'} />
-          <div className="chat-details">
-            <h3>{selectedConversation.user_name}</h3>
-            <p>{isTyping ? 'typing...' : 'Online'}</p>
+        <div className='back-btn'>
+          {isMobile && (
+            <Button
+              type="text"
+              icon={<ArrowLeftOutlined />}
+              onClick={onBackToChatList}
+              className="back-button"
+            />
+          )}
+          <div className="chat-info">
+            <Avatar size={40} src={selectedConversation.avatar || '/default-avatar.png'} />
+            <div className="chat-details">
+              <h3>{selectedConversation.user_name}</h3>
+              <p>{isTyping ? 'typing...' : 'Online'}</p>
+            </div>
           </div>
         </div>
         <div className="chat-actions">
@@ -84,10 +86,10 @@ const ChatArea = ({
       <div className="messages-container">
         {messages.length > 0 ? (
           messages.map((msg) => (
-            <Message 
-              key={msg._id} 
-              message={msg} 
-              isOutgoing={msg.from === currentUser} 
+            <Message
+              key={msg._id}
+              message={msg}
+              isOutgoing={msg.from === currentUser}
             />
           ))
         ) : (
@@ -109,9 +111,9 @@ const ChatArea = ({
           onKeyDown={handleKeyDown}
           autoSize={{ minRows: 1, maxRows: 6 }}
         />
-        <Button 
-          type="text" 
-          icon={messageInput ? <SendOutlined /> : <SmileOutlined />} 
+        <Button
+          type="text"
+          icon={messageInput ? <SendOutlined /> : <SmileOutlined />}
           onClick={handleSend}
           disabled={!messageInput.trim()}
         />
